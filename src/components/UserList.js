@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import UserManagement from './UserManagment';
+
 import {
 	Typography,
 	List,
@@ -15,16 +17,17 @@ import PersonIcon from "@mui/icons-material/Person";
 
 const UserList = () => {
 	const [users, setUsers] = useState([
-		{ id: 1, name: "Jirka" },
-		{ id: 2, name: "Peter" },
-		{ id: 3, name: "Adela" },
+		{ id: 1, name: "Jirka", email: "john@example.com" },
+		// ...
 	]);
 
 	const handleDeleteUser = (userId) => {
 		const updatedUsers = users.filter((user) => user.id !== userId);
 		setUsers(updatedUsers);
 	};
-
+	const handleAddUser = (newUser) => {
+		setUsers([...users, newUser]);
+	};
 	return (
 		<div>
 			<Box textAlign="center" boxShadow={3} p={2} m={2}>
@@ -48,9 +51,7 @@ const UserList = () => {
 					</ListItem>
 				))}
 			</List>
-				<Button variant="contained" color="primary">
-					Add User
-				</Button>
+				<UserManagement addUser={handleAddUser} />
 			</Box>
 		</div>
 	);

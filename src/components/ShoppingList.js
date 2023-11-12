@@ -33,12 +33,17 @@ const ShoppingList = () => {
 	};
 
 	const handleQuantityChange = (productId, quantity) => {
-		const updatedProducts = products.map((product) =>
-			product.id === productId
-				? { ...product, quantity: parseInt(quantity) || 0 }
-				: product
-		);
-		setProducts(updatedProducts);
+		// Parse the quantity as an integer or default to 0 if it's not a valid number.
+		const newQuantity = parseInt(quantity) || 0;
+
+		if (newQuantity >= 0) {
+			const updatedProducts = products.map((product) =>
+				product.id === productId
+					? { ...product, quantity: newQuantity }
+					: product
+			);
+			setProducts(updatedProducts);
+		}
 	};
 
 	const handleNameChange = (productId, name) => {

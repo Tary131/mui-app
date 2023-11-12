@@ -1,16 +1,17 @@
-import "./App.css";
-import Navbar from "./components/Navbar.js";
-import ShoppingList from "./components/ShoppingList";
-import UserList from "./components/UserList";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ShoppingListDetail from './components/ShoppingListDetail';
+import ShoppingListOverview from './components/ShoppingListOverview';
 
-function App() {
+const AppRouter = () => {
 	return (
-		<div>
-			<Navbar></Navbar>
-			<ShoppingList />
-			<UserList></UserList>
-		</div>
+		<Router>
+			<Switch>
+				<Route path="/shopping-lists/:id" component={ShoppingListDetail} />
+				<Route path="/shopping-lists" component={ShoppingListOverview} />
+			</Switch>
+		</Router>
 	);
-}
+};
 
 export default App;

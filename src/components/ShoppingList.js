@@ -9,6 +9,7 @@ import {
 	TextField,
 	Button,
 	Box,
+	Checkbox,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -21,10 +22,16 @@ const ShoppingList = () => {
 	]);
 
 	const handleAddProduct = () => {
-		const newProduct = { id: Date.now(), name: "New Product", quantity: 1 };
+		const newProduct = { id: Date.now(), name: "", quantity: 1 };
 		setProducts([...products, newProduct]);
 	};
-
+	const handleToggle = (productId) => {
+		setProducts((prevProducts) =>
+			prevProducts.map((product) =>
+				product.id === productId ? { ...product, bought: !product.bought } : product
+			)
+		);
+	};
 	const handleDeleteProduct = (productId) => {
 		const updatedProducts = products.filter(
 			(product) => product.id !== productId
@@ -55,10 +62,8 @@ const ShoppingList = () => {
 
 	return (
 		<div>
-			<Box textAlign="center">
+			<Box textAlign="center" boxShadow={3} p={2} m={2}>
 				<Typography variant="h5">{listName}</Typography>
-			</Box>
-			<Box textAlign="center">
 				<List>
 					{products.map((product) => (
 						<ListItem key={product.id}>
@@ -66,6 +71,10 @@ const ShoppingList = () => {
 								<TextField
 									value={product.name}
 									onChange={(e) => handleNameChange(product.id, e.target.value)}
+									id="outlined-basic"
+									label="Product"
+									variant="outlined"
+									placeholder="Your Product"
 								/>
 								<TextField
 									type="number"
@@ -76,6 +85,11 @@ const ShoppingList = () => {
 								/>
 							</ListItemText>
 							<ListItemSecondaryAction>
+								<Checkbox
+									checked={product.bought}
+									onChange={() => handleToggle(product.id)}
+									inputProps={{ 'aria-label': 'controlled' }}
+								/>
 								<IconButton
 									onClick={() => handleDeleteProduct(product.id)}
 									edge="end"
@@ -87,8 +101,6 @@ const ShoppingList = () => {
 						</ListItem>
 					))}
 				</List>
-			</Box>
-			<Box textAlign="center">
 				<Button variant="contained" color="primary" onClick={handleAddProduct}>
 					Add Product
 				</Button>

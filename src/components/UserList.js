@@ -27,10 +27,8 @@ const UserList = () => {
 
 	return (
 		<div>
-			<Box textAlign="center">
+			<Box textAlign="center" boxShadow={3} p={2} m={2}>
 				<Typography variant="h5">Users</Typography>
-			</Box>
-
 			<List>
 				{users.map((user) => (
 					<ListItem key={user.id}>
@@ -50,7 +48,6 @@ const UserList = () => {
 					</ListItem>
 				))}
 			</List>
-			<Box textAlign="center">
 				<Button variant="contained" color="primary">
 					Add User
 				</Button>

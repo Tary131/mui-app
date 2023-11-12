@@ -1,6 +1,5 @@
+import React from "react";
 import Navbar from "../components/Navbar";
-import ShoppingList from "../components/ShoppingList";
-import UserList from "../components/UserList";
 
 function Home() {
     return (
